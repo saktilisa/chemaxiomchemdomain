@@ -1,0 +1,15 @@
+== The ChemAxiomChemDomain Ontology ==
+
+The ChemAxiomChemDomain Ontology is currently a small ontology, clarifying some fundamental concepts in the chemical domain. In particular, the ontology addresses the fundamental distinction between the platonic idea of a molecule (and any data, such as identifiers etc. that may be associated with it) and bulk substances, which are composed of ("hasPart") molecules. As such, the ontology allows the modeling of both abstract molecules, bulk substances such as pure substances, mixtures, formulations etc. as well as the modeling of instances of these substances. The ontology is, in the first instance, intended to act as a schema for the generation of rdf and freely mixes OWL and RDF and is, as such, OWL Full (bear this in mind if you have reasoning tasks you may wish to accomplish).
+
+
+== Brief Description ==
+
+The fundamental classes in the ontology are ChemicalElement, MolecularEntity, ChemicalSpecies 
+
+
+=== Licence ===
+
+The ontology is licences under a GPL v.3 licence.
+
+**Please note: other licence forms are available for commercial use.**

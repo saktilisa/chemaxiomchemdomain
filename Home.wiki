@@ -1,35 +1,71 @@
-== Welcome ==
+== The ChemAxiomChemDomain Ontology ==
 
-Welcome to your wiki! This is the default page we've installed for your convenience. Go ahead and edit it.
+The ChemAxiomChemDomain Ontology is currently a small ontology, clarifying some
+fundamental concepts in the chemical domain. In particular, the ontology
+addresses the fundamental distinction between the platonic idea of a molecule
+(and any data, such as identifiers etc. that may be associated with it) and bulk
+substances, which are composed of ("hasPart") molecules. As such, the ontology
+allows the modeling of both abstract molecules, bulk substances such as pure
+substances, mixtures, formulations etc. as well as the modeling of instances of
+these substances. The ontology is, in the first instance, intended to act as a
+schema for the generation of rdf and freely mixes OWL and RDF and is, as such,
+OWL Full (bear this in mind if you have reasoning tasks you may wish to
+accomplish).
 
-=== Wiki features ===
+== Brief Description ==
 
-This wiki uses the [[http://www.wikicreole.org/|Creole]] syntax, and is fully compatible with the 1.0 specification.
+The fundamental classes in the ontology are ChemicalElement, MolecularEntity,
+and ChemicalSpecies. All of these classes are subclasses of snap:Object, which,
+in turn, is a class of the Basic Formal Ontology, which serves as the upper
+ontology for this ontology.
 
-The wiki itself is actually a hg repository, which means you can clone it, edit it locally/offline, add images or any other file type, and push it back to us. It will be live immediately.
-
-Go ahead and try:
+In terms of axiomatisation, there is an explicit "hasPart" relationship between
+the "ChemicalSpecies" and "MolecularEntity" classes: chemical species are
+composed of molecular entities:
 
 {{{
-$ hg clone http://bitbucket.org/na303/chemaxiomchemdomain/wiki/
+:ChemicalSpecies
+      a       owl:Class ;
+      rdfs:comment "An ensemble of chemically identical molecular entities that can explore the same set of molecular energy levels on the time scale of the experiment."@en ;
+      rdfs:subClassOf snap:Object ;
+      rdfs:subClassOf
+              [ a       owl:Restriction ;
+                owl:onProperty :preseentInAmount ;
+                owl:someValuesFrom xsd:string
+              ] ;
+      rdfs:subClassOf
+              [ a       owl:Class ;
+                owl:unionOf ([ a       owl:Restriction ;
+                            owl:onProperty :hasPart ;
+                            owl:someValuesFrom :MolecularEntity
+                          ] [ a       owl:Restriction ;
+                            owl:onProperty :hasPart ;
+                            owl:someValuesFrom :ChemicalSpecies
+                          ])
+              ] ;
+      owl:disjointWith :ChemicalElement , :MolecularEntity , :ChemicalIdentifier .
 }}}
 
-Wiki pages are normal files, with the .wiki extension. You can edit them locally, as well as creating new ones.
-
-=== Syntax highlighting ===
-
-You can also highlight snippets of text, we use the excellent [[http://www.pygments.org/|Pygments]] library.
-
-Here's an example of some Python code:
-
+As such then, formulations, solvents etc. are subclasses of ChemicalSpecies. The
+ontology furthermore defines generic classes of ChemicalSpecies such as
+solvents, acids, bases, catalysts etc.. These are defined in terms of the role
+that is inherent in them under a given set of circumstances
 {{{
-#!python
 
-def wiki_rocks(text):
-	formatter = lambda t: "funky"+t
-	return formatter(text)
+:Solvent
+      a       owl:Class ;
+      rdfs:subClassOf :ChemicalSpecies ;
+      owl:equivalentClass
+              [ a       owl:Class ;
+                owl:intersectionOf (:ChemicalSpecies [ a       owl:Restriction ;
+                            owl:onProperty :hasRole ;
+                            owl:someValuesFrom :SolventRole
+                          ])
+              ] .
 }}}
 
-You can check out the source of this page to see how that's done, and make sure to bookmark [[http://pygments.org/docs/lexers/|the vast library of Pygment lexers]], we accept the 'short name' or the 'mimetype' of anything in there.
+=== Licence ===
 
-Have fun!
+The ontology is licences under a GPL v.3 licence.
+
+**Please note: other licence forms are available for commercial use.**
