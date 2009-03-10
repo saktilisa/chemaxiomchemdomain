@@ -10,7 +10,7 @@ substances, mixtures, formulations etc. as well as the modeling of instances of
 these substances. The ontology is, in the first instance, intended to act as a
 schema for the generation of rdf and freely mixes OWL and RDF and is, as such,
 OWL Full (bear this in mind if you have reasoning tasks you may wish to
-accomplish).
+accomplish). For questions, discussion and feedback, please use the [[http://groups.google.com/group/chemaxiom|ChemAxiom Google Group]]. To become involved in the development of these ontologies, please email chemaxiom at googlemail dot com.
 
 == Brief Description ==
 
