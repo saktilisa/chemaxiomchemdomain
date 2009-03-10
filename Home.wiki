@@ -66,6 +66,6 @@ that is inherent in them under a given set of circumstances
 
 === Licence ===
 
-The ontology is licences under a GPL v.3 licence.
+The ontology is licenced under a GPL v.3 licence.
 
 **Please note: other licence forms are available for commercial use.**
